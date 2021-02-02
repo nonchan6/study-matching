@@ -1,23 +1,16 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }}</title>
-  <link rel="stylesheet" href="{% static "css/style.css" %}" />
-</head>
-<body>
-  <h1>{{ title }}</h1>
-  <table>
-    <form action="{% url 'study:create' %}" method="post">
-      {% csrf_token %}
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input type="submit" value="送信"></td>
-      </tr>
-    </form>
-  </table>
-</body>
-</html>
+{% extends 'study/base.html' %}
+{% block content %}
+<form method="POST" action="{% url 'create_account' %}">
+  {% csrf_token %}
+  <label>ユーザーID</label>
+  {{ form.username }}
+  {{ form.username.errors }}
+  <label>パスワード</label>
+  {{ form.password1 }}
+  {{ form.password1.errors }}
+  <label>パスワード(確認)</label>
+  {{ form.password2 }}
+  {{ form.password2.errors }}
+  <button type="submit">登録</button>
+</form>
+{% endblock %}

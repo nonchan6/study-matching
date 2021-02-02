@@ -1,29 +1,63 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sign up</title>
-</head>
-<body>
-  <h1>登録</h1>
-  <h1>{{ title }}</h1>
-  <table>
-    <form action="{% url 'study:signup' %}" method="post">
-      {% csrf_token %}
-      {{ form.as_table }}
-      {% for sub in subject %}
-      <tr>
-        <td>{{ sub }}</td>
-      </tr>
-      {% endfor%}
-      <tr>
-        <td></td>
-        <td>
-          <input type="submit" value="送信">
-        </td>
-      </tr>
-    </form>
-  </table>
-</body>
-</html>
+{% extends 'study/base.html' %}
+{% block content %}
+<h1>登録</h1>
+<h1>{{ title }}</h1>
+<form action="{% url 'study:signup' %}" method="post">
+  {{ form.as_p }}
+  {% csrf_token %}
+  <!-- <input type="submit" value="送信"> -->
+  <button type="submit">送信</button>
+</form>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+  /* const facultyElement = $('#id_faculty');
+  const departmentElement = $('#id_department');
+  const departments = {
+    {% for fac in faculty_list %}
+  '{{ fac.pk }}': [
+    {% for dep in fac.department_set.all %}
+  {
+    'pk': '{{ dep.pk }}',
+      'name': '{{ dep.name}}'
+  },
+  {% endfor %}
+      ],
+  {% endfor %}
+}; */
+
+  //const changeDepartment = (select) => {
+    //学科の選択肢を空にする
+  /* departmentElement.children().remove(); */
+
+    //選択した学部に紐付く学科の一覧を取得する。
+  /* const facultyId = facultyElement.val();
+  const departmentList = departmentElements[facultyId]; */
+
+    //子カテゴリの選択肢を作成・追加
+  /* for (const department of departmentList) {
+    const option = $('<option>');
+    option.val(department['pk']);
+    option.text(department['name']);
+    departmentElement.append(option);
+  } */
+
+    //指定があれば、そのカテゴリを選択する
+  /* if (select !== undefined) {
+    departmentElement.val(select);
+  }
+}; */
+
+  /* $('#id_faculty').on('change', () => {
+    changeDepartment();
+  }); */
+
+  //入力値に問題があって再表示された場合、ページ表示時点で小カテゴリが絞り込まれるようにする
+  /*if (facultyElement.val()) {
+    const selectedDepartment = departmentElement.val();
+    changeDepartment(selectedDepartment);
+  }*/
+
+</script>
+{% endblock %}

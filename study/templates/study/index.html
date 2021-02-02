@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index</title>
-  <link rel="stylesheet" href="{% static "css/style.css" %}" />
-  <script src="{% static 'javascript/sample.js' %}"></script>
-</head>
-<body>
-  <button>ログアウト</button>
-  <button>ログイン</button>
-  <button><a href="{% url 'study:signup' %}">登録</a></button>
-</body>
-</html>
+{% extends 'study/base.html' %}
+{% block content %}
+<button>ログイン</button>
+<button><a href="{% url 'study:signup' %}">登録</a></button>
+{% endblock %}

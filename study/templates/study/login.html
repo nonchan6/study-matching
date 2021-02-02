@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login</title>
-</head>
-<body>
-  <h1>ログイン</h1>
+{% extends 'study/base.html' %}
+{% block content %}
+<div class="row">
+  <!-- 左側：ログインエリア -->
+  <div class="card col-md-6">
+    <div class="card-body">
+      <form action="{% url 'study:login' %}" method="POST">
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        {{ field }}
+        {{ field.errors }}
+        <hr>
+        {% endfor %}
+        <button type="submit" class="btn btn-success btn-lg btn-block">ログイン</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
 
-
-</body>
-</html>
+  <!-- 右側：会員登録 -->
+  <div class="card col-md-6">
+    <div class="card-body">
+      <a href="{% url 'study:user_create' %}" class="btn btn-success btn-lg btn-block">会員登録</a>
+    </div>
+  </div><!-- 右側、会員登録エリアおわり -->
+</div>
+{% endblock %}
